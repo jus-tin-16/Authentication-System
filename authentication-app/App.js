@@ -1,34 +1,30 @@
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { Button } from '@react-navigation/elements';
+import React from 'react';
+import { StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from './components/Login';
+import Register from './components/Register';
+import Index from './components/Index';
 
 const Stack = createStackNavigator();
 
 function MyStack() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Profile" component={Login} />
+    <Stack.Navigator 
+      initialRouteName={'Login'}
+      screenOptions={{
+        header: () => null
+      }}
+    >
+      <Stack.Screen 
+        name="Login" 
+        component={Login} 
+      />
+      <Stack.Screen name="Register" component={Register} />
+      <Stack.Screen name="Home" component={Index} />
     </Stack.Navigator>
   );
 }
-
-function HomeScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
 
 export default function App() {
   return (
@@ -37,3 +33,7 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+
+});
